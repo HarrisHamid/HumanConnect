@@ -31,50 +31,52 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-warning: var(--warning);
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Inter", system-ui, sans-serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.875rem;
 
-  --background: oklch(0.12 0.02 280);
-  --foreground: oklch(0.98 0.005 280);
+  --background: oklch(0.985 0.004 240);
+  --foreground: oklch(0.13 0.028 252);
 
-  --card: oklch(0.16 0.025 280);
-  --card-foreground: oklch(0.98 0.005 280);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.028 252);
 
-  --popover: oklch(0.16 0.025 280);
-  --popover-foreground: oklch(0.98 0.005 280);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.028 252);
 
-  --primary: oklch(0.65 0.22 285);
-  --primary-foreground: oklch(0.99 0 0);
-  --primary-glow: oklch(0.72 0.22 290);
+  --primary: oklch(0.52 0.22 265);
+  --primary-foreground: oklch(1 0 0);
+  --primary-glow: oklch(0.62 0.19 258);
 
-  --secondary: oklch(0.22 0.03 280);
-  --secondary-foreground: oklch(0.98 0.005 280);
+  --secondary: oklch(0.955 0.014 240);
+  --secondary-foreground: oklch(0.22 0.028 252);
 
-  --muted: oklch(0.2 0.025 280);
-  --muted-foreground: oklch(0.65 0.02 280);
+  --muted: oklch(0.955 0.01 240);
+  --muted-foreground: oklch(0.46 0.024 248);
 
-  --accent: oklch(0.72 0.18 195);
-  --accent-foreground: oklch(0.1 0.02 280);
+  --accent: oklch(0.65 0.19 222);
+  --accent-foreground: oklch(1 0 0);
 
-  --destructive: oklch(0.62 0.24 25);
-  --destructive-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.57 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
 
-  --success: oklch(0.7 0.18 150);
-  --warning: oklch(0.78 0.17 80);
+  --success: oklch(0.55 0.16 152);
+  --warning: oklch(0.62 0.16 78);
 
-  --border: oklch(0.25 0.03 280 / 60%);
-  --input: oklch(0.22 0.03 280);
-  --ring: oklch(0.65 0.22 285);
+  --border: oklch(0.88 0.018 240);
+  --input: oklch(0.93 0.013 240);
+  --ring: oklch(0.52 0.22 265);
 
-  --gradient-hero: radial-gradient(ellipse at top, oklch(0.25 0.15 285 / 40%), transparent 60%);
-  --gradient-primary: linear-gradient(135deg, oklch(0.65 0.22 285), oklch(0.72 0.22 290));
-  --gradient-accent: linear-gradient(135deg, oklch(0.65 0.22 285), oklch(0.72 0.18 195));
-  --shadow-glow: 0 0 60px oklch(0.65 0.22 285 / 35%);
-  --shadow-card: 0 10px 40px -10px oklch(0 0 0 / 50%);
+  --gradient-hero: radial-gradient(ellipse 90% 55% at 50% -5%, oklch(0.68 0.14 240 / 22%), transparent 65%);
+  --gradient-primary: linear-gradient(135deg, oklch(0.52 0.22 265), oklch(0.65 0.19 222));
+  --gradient-accent: linear-gradient(135deg, oklch(0.52 0.22 265), oklch(0.72 0.15 200));
+  --shadow-glow: 0 0 50px oklch(0.52 0.22 265 / 20%);
+  --shadow-card: 0 2px 20px -4px oklch(0.13 0.028 252 / 8%), 0 1px 3px oklch(0.13 0.028 252 / 4%);
+  --shadow-card-hover: 0 10px 40px -8px oklch(0.52 0.22 265 / 18%), 0 2px 8px oklch(0.13 0.028 252 / 5%);
 }
 
 @layer base {
@@ -91,22 +93,95 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.3 0.18 285 / 30%), transparent),
-      linear-gradient(to bottom, var(--background), var(--background));
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+
+  /* Scroll reveal system */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-reveal].in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  [data-reveal-left] {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-reveal-left].in-view {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  [data-reveal-right] {
+    opacity: 0;
+    transform: translateX(40px);
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-reveal-right].in-view {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    [data-reveal-left],
+    [data-reveal-right] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Shine button effect */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(1 0 0 / 22%) 50%,
+      transparent 100%
+    );
+    animation: shine 3s ease-in-out infinite 0.8s;
+    pointer-events: none;
   }
 }
 
+/* ─── Utility classes ─────────────────────────────────────────────────────── */
+
 @utility grid-bg {
   background-image:
-    linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.52 0.22 265 / 7%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.52 0.22 265 / 7%) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent 80%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, black, transparent 85%);
 }
 
 @utility text-gradient {
-  background: linear-gradient(135deg, oklch(0.98 0.005 280), oklch(0.75 0.15 285));
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -115,6 +190,8 @@
 @utility glow-primary {
   box-shadow: var(--shadow-glow);
 }
+
+/* ─── Keyframes ───────────────────────────────────────────────────────────── */
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -127,14 +204,78 @@
 }
 
 @keyframes float-up {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translateX(-50%) scale(1) rotate(0deg); }
+  33% { transform: translateX(calc(-50% + 60px)) scale(1.06) rotate(3deg); }
+  66% { transform: translateX(calc(-50% - 40px)) scale(0.95) rotate(-2deg); }
+}
+
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-50px, 35px) scale(1.1); }
+  75% { transform: translate(25px, -25px) scale(0.92); }
+}
+
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  35% { transform: translate(40px, -40px) scale(0.88); }
+  70% { transform: translate(-30px, 25px) scale(1.08); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+@keyframes shine {
+  from { transform: translateX(-100%) skewX(-15deg); }
+  to   { transform: translateX(250%) skewX(-15deg); }
+}
+
+@keyframes draw-line {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Animation utilities ─────────────────────────────────────────────────── */
 
 @utility animate-pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @utility animate-float-up {
-  animation: float-up 0.6s ease-out both;
+  animation: float-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-badge-float {
+  animation: badge-float 3s ease-in-out infinite;
+}
+
+@utility animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.93 0.01 240) 25%,
+    oklch(0.96 0.008 240) 50%,
+    oklch(0.93 0.01 240) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@utility animate-draw-line {
+  animation: draw-line 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
