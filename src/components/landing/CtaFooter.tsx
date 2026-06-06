@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-
 export function CtaFooter() {
   return (
     <section id="cta" className="py-32 relative overflow-hidden">
@@ -9,15 +7,6 @@ export function CtaFooter() {
         <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
           Ready to give your clinic <span className="text-gradient">a voice?</span>
         </h2>
-        <div className="mt-10">
-          <a
-            href="#"
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-medium glow-primary hover:opacity-95 transition-all"
-          >
-            Request Early Access
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-        </div>
         <p className="mt-6 text-sm text-muted-foreground">
           No hold music. No missed calls. No forgetting.
         </p>
