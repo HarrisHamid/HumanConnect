@@ -26,15 +26,16 @@ export function useLiveData() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Initial fetch
+    const db = supabase;
+    if (!db) {
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       const [{ data: callsData }, { data: apptData }] = await Promise.all([
-        supabase.from("calls").select("*").order("created_at", { ascending: false }).limit(20),
-        supabase
-          .from("appointments")
-          .select("*")
-          .order("created_at", { ascending: false })
-          .limit(20),
+        db.from("calls").select("*").order("created_at", { ascending: false }).limit(20),
+        db.from("appointments").select("*").order("created_at", { ascending: false }).limit(20),
       ]);
 
       if (callsData) setCalls(callsData);
@@ -44,16 +45,14 @@ export function useLiveData() {
 
     fetchData();
 
-    // Real-time subscription for calls
-    const callsSub = supabase
+    const callsSub = db
       .channel("calls-channel")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "calls" }, (payload) =>
         setCalls((prev) => [payload.new as Call, ...prev]),
       )
       .subscribe();
 
-    // Real-time subscription for appointments
-    const apptSub = supabase
+    const apptSub = db
       .channel("appointments-channel")
       .on(
         "postgres_changes",
@@ -63,8 +62,8 @@ export function useLiveData() {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(callsSub);
-      supabase.removeChannel(apptSub);
+      db.removeChannel(callsSub);
+      db.removeChannel(apptSub);
     };
   }, []);
 
