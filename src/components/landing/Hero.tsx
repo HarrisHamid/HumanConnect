@@ -15,7 +15,7 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 90% 80% at 50% 40%, rgba(248,250,255,0.84) 25%, rgba(248,250,255,0.65) 55%, rgba(248,250,255,0.30) 80%, rgba(248,250,255,0.05) 100%)",
+            "radial-gradient(ellipse 90% 80% at 50% 40%, rgba(248,250,255,0.96) 30%, rgba(248,250,255,0.88) 55%, rgba(248,250,255,0.55) 78%, rgba(248,250,255,0.15) 100%)",
         }}
       />
 
