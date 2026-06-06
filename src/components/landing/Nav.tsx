@@ -15,12 +15,6 @@ export function Nav() {
           <a href="#memory" className="hover:text-foreground transition-colors">Memory</a>
           <a href="#dashboard" className="hover:text-foreground transition-colors">Dashboard</a>
         </nav>
-        <a
-          href="#cta"
-          className="text-sm px-4 py-2 rounded-lg bg-foreground text-background font-medium hover:opacity-90 transition-opacity"
-        >
-          Early Access
-        </a>
       </div>
     </header>
   );

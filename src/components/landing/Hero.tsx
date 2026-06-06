@@ -1,9 +1,14 @@
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { ShaderAnimation } from "@/components/ui/shader-animation";
 
 export function Hero() {
   return (
     <section className="relative pt-40 pb-32 overflow-hidden">
-      <div className="absolute inset-0 grid-bg pointer-events-none" />
+      {/* Shader background */}
+      <div className="absolute inset-0 pointer-events-none opacity-30">
+        <ShaderAnimation />
+      </div>
+      <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
       <div className="absolute inset-0 bg-[var(--gradient-hero)] pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-6 text-center">
@@ -32,10 +37,6 @@ export function Hero() {
             See It Live
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
-          <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card/30 hover:bg-card transition-colors font-medium">
-            <Play className="size-4" />
-            Watch Demo
-          </button>
         </div>
 
         <p className="mt-12 text-xs uppercase tracking-[0.2em] text-muted-foreground/60 animate-float-up [animation-delay:320ms]">
