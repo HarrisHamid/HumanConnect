@@ -24,29 +24,20 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative max-w-5xl mx-auto px-6 text-center">
-        {/* Live badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-white/70 backdrop-blur-sm text-sm font-medium text-primary animate-float-up animate-badge-float">
-          <span className="relative flex size-2">
-            <span className="absolute inset-0 rounded-full bg-success animate-[pulse-ring_1.8s_ease-out_infinite]" />
-            <span className="relative rounded-full size-2 bg-success" />
-          </span>
-          AI Receptionist Active
-        </div>
-
         <h1 className="mt-8 text-5xl md:text-[4.5rem] font-semibold tracking-tight leading-[1.06] animate-float-up [animation-delay:80ms]">
-          Any business.<br />
+          Any business.
+          <br />
           <span className="text-gradient italic">Always answered.</span>
         </h1>
 
         <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light animate-float-up [animation-delay:160ms]">
-          HumanConnect AI picks up every call, books the appointment, and
-          remembers every customer — so your team never has to choose between
-          the phone and the person in front of them.
+          HumanConnect AI picks up every call, books the appointment, and remembers every customer —
+          so your team never has to choose between the phone and the person in front of them.
         </p>
 
         <div className="mt-10 flex items-center justify-center animate-float-up [animation-delay:240ms]">
           <a
-            href="#industries"
+            href="#cta"
             className="btn-shine group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium glow-primary hover:opacity-95 transition-all"
           >
             See a live dashboard

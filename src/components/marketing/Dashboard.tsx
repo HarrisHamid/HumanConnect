@@ -282,7 +282,7 @@ export function Dashboard() {
                 <span>This is a preview — the real dashboards run on live call data.</span>
               </div>
               <a
-                href="#industries"
+                href="#cta"
                 className="group inline-flex items-center gap-1.5 text-sm font-medium text-primary"
               >
                 Open a live dashboard for your industry

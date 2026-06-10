@@ -1,5 +1,7 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, PhoneCall } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/ui/reveal";
+import { verticalList } from "@/config/verticals";
 
 export function CtaFooter() {
   return (
@@ -73,22 +75,39 @@ export function CtaFooter() {
               <span className="italic font-light text-white/85">a voice?</span>
             </h2>
             <p className="mt-6 text-lg text-white/70 font-light">
-              No hold music. No missed calls. No forgetting.
+              Pick your industry to open a real, working dashboard — its own KPIs,
+              language, and look.
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#industries"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-foreground font-semibold hover:bg-white/95 transition-all shadow-[0_4px_20px_oklch(0_0_0/20%)] hover:shadow-[0_8px_30px_oklch(0_0_0/30%)] hover:-translate-y-0.5"
-              >
-                See a live dashboard
-                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-              <a
-                href="#how"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition-all"
-              >
-                How it works
+            {/* Industry picker — each links into its live dashboard */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto text-left">
+              {verticalList.map((v) => (
+                <Link
+                  key={v.id}
+                  to="/$vertical"
+                  params={{ vertical: v.id }}
+                  // data-vertical exposes this vertical's accent (teal / amber)
+                  data-vertical={v.id}
+                  className="group flex items-start gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm transition-all hover:bg-white/15 hover:-translate-y-0.5"
+                >
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 text-v-accent">
+                    <PhoneCall className="h-5 w-5" />
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-semibold text-white">{v.displayName}</span>
+                    <span className="mt-0.5 block text-sm text-white/70">{v.tagline}</span>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-white">
+                      See the live dashboard
+                      <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-6">
+              <a href="#how" className="text-sm text-white/70 hover:text-white transition-colors">
+                Or see how it works →
               </a>
             </div>
 
