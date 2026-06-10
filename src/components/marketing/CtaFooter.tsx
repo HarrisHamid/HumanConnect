@@ -1,4 +1,4 @@
-import { ArrowRight, PhoneCall } from "lucide-react";
+import { ArrowRight, PhoneCall, Wrench, Stethoscope } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/ui/reveal";
 import { verticalList } from "@/config/verticals";
@@ -75,8 +75,8 @@ export function CtaFooter() {
               <span className="italic font-light text-white/85">a voice?</span>
             </h2>
             <p className="mt-6 text-lg text-white/70 font-light">
-              Pick your industry to open a real, working dashboard — its own KPIs,
-              language, and look.
+              Pick your industry to open a real, working dashboard — its own KPIs, language, and
+              look.
             </p>
 
             {/* Industry picker — each links into its live dashboard */}
@@ -86,17 +86,25 @@ export function CtaFooter() {
                   key={v.id}
                   to="/$vertical"
                   params={{ vertical: v.id }}
-                  // data-vertical exposes this vertical's accent (teal / amber)
                   data-vertical={v.id}
-                  className="group flex items-start gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm transition-all hover:bg-white/15 hover:-translate-y-0.5"
+                  // Swapped to high-opacity slate-100 mix to match your image exactly
+                  className="group flex items-start gap-4 rounded-2xl border border-white/30 bg-slate-100/90 p-5 backdrop-blur-md transition-all duration-200 hover:bg-slate-50 hover:-translate-y-0.5 shadow-lg shadow-black/5"
                 >
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 text-v-accent">
-                    <PhoneCall className="h-5 w-5" />
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-200/60 text-slate-800">
+                    {/* Dynamic Icon Selection */}
+                    {v.id === "mechanic" ? (
+                      <Wrench className="h-5 w-5" />
+                    ) : v.id === "dental" ? (
+                      <Stethoscope className="h-5 w-5" />
+                    ) : (
+                      <PhoneCall className="h-5 w-5" />
+                    )}
                   </span>
                   <span className="flex-1">
-                    <span className="block font-semibold text-white">{v.displayName}</span>
-                    <span className="mt-0.5 block text-sm text-white/70">{v.tagline}</span>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-white">
+                    {/* Darker text styling to ensure perfect readability against the clean slate-white card */}
+                    <span className="block font-semibold text-slate-900">{v.displayName}</span>
+                    <span className="mt-0.5 block text-sm text-slate-600">{v.tagline}</span>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-slate-800 group-hover:text-slate-900">
                       See the live dashboard
                       <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </span>
