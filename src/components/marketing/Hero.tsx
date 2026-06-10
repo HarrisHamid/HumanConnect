@@ -34,32 +34,33 @@ export function Hero() {
         </div>
 
         <h1 className="mt-8 text-5xl md:text-[4.5rem] font-semibold tracking-tight leading-[1.06] animate-float-up [animation-delay:80ms]">
-          Every Patient Deserves<br />
-          <span className="text-gradient italic">to Be Remembered</span>
+          Any business.<br />
+          <span className="text-gradient italic">Always answered.</span>
         </h1>
 
         <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light animate-float-up [animation-delay:160ms]">
-          HumanConnect AI answers your clinic's calls, books appointments, and
-          remembers every patient — so your staff doesn't have to.
+          HumanConnect AI picks up every call, books the appointment, and
+          remembers every customer — so your team never has to choose between
+          the phone and the person in front of them.
         </p>
 
         <div className="mt-10 flex items-center justify-center animate-float-up [animation-delay:240ms]">
           <a
-            href="#dashboard"
+            href="#industries"
             className="btn-shine group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium glow-primary hover:opacity-95 transition-all"
           >
-            See It Live
+            See a live dashboard
             <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
           </a>
         </div>
 
         <p className="mt-14 text-xs uppercase tracking-[0.22em] text-muted-foreground/50 font-medium animate-float-up [animation-delay:320ms]">
-          Trusted by forward-thinking clinics
+          Built for the businesses that run on the phone
         </p>
 
         {/* Trust indicators */}
         <div className="mt-5 flex items-center justify-center gap-8 animate-float-up [animation-delay:400ms]">
-          {["24/7 Available", "HIPAA Ready", "< 1s Response"].map((item) => (
+          {["24/7 Available", "Books in real time", "< 1s Response"].map((item) => (
             <div key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="size-1.5 rounded-full bg-primary/50" />
               {item}

@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VerticalIndexRouteImport } from './routes/$vertical/index'
+import { Route as VerticalLocationSlugRouteImport } from './routes/$vertical/$locationSlug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerticalIndexRoute = VerticalIndexRouteImport.update({
+  id: '/$vertical/',
+  path: '/$vertical/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerticalLocationSlugRoute = VerticalLocationSlugRouteImport.update({
+  id: '/$vertical/$locationSlug',
+  path: '/$vertical/$locationSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$vertical/$locationSlug': typeof VerticalLocationSlugRoute
+  '/$vertical/': typeof VerticalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$vertical/$locationSlug': typeof VerticalLocationSlugRoute
+  '/$vertical': typeof VerticalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$vertical/$locationSlug': typeof VerticalLocationSlugRoute
+  '/$vertical/': typeof VerticalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/$vertical/$locationSlug' | '/$vertical/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/$vertical/$locationSlug' | '/$vertical'
+  id: '__root__' | '/' | '/$vertical/$locationSlug' | '/$vertical/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  VerticalLocationSlugRoute: typeof VerticalLocationSlugRoute
+  VerticalIndexRoute: typeof VerticalIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$vertical/': {
+      id: '/$vertical/'
+      path: '/$vertical'
+      fullPath: '/$vertical/'
+      preLoaderRoute: typeof VerticalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$vertical/$locationSlug': {
+      id: '/$vertical/$locationSlug'
+      path: '/$vertical/$locationSlug'
+      fullPath: '/$vertical/$locationSlug'
+      preLoaderRoute: typeof VerticalLocationSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  VerticalLocationSlugRoute: VerticalLocationSlugRoute,
+  VerticalIndexRoute: VerticalIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

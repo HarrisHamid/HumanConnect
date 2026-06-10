@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/reveal";
 const steps = [
   {
     icon: PhoneCall,
-    title: "Patient Calls",
+    title: "A Customer Calls",
     body: "No hold music. No menus. Just a conversation.",
     color: "from-blue-500/10 to-blue-400/5 border-blue-200/60",
     iconBg: "from-primary/15 to-primary/5 border-primary/20 text-primary",
@@ -18,8 +18,8 @@ const steps = [
   },
   {
     icon: CalendarCheck,
-    title: "Appointment Booked",
-    body: "Confirmed instantly. Synced to your calendar.",
+    title: "Handled Instantly",
+    body: "Booked, quoted, or routed — and logged to your dashboard.",
     color: "from-indigo-500/10 to-indigo-400/5 border-indigo-200/60",
     iconBg: "from-primary/15 to-primary/5 border-primary/20 text-primary",
   },

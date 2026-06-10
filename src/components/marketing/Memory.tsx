@@ -38,13 +38,13 @@ export function Memory() {
           </h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed font-light max-w-lg">
             When Mrs. Johnson calls back three months later, HumanConnect already
-            knows her name, her last visit, and her preferred doctor.
+            knows her name, her last visit, and what she came in for.
           </p>
 
           <ul className="mt-8 space-y-3.5">
             {[
-              "Full patient history, instantly recalled",
-              "Preferred doctors and appointment times",
+              "Full customer history, instantly recalled",
+              "Preferred staff, times, and services",
               "Notes from previous calls carry forward",
             ].map((item) => (
               <li key={item} className="flex items-center gap-3">
@@ -60,6 +60,8 @@ export function Memory() {
               first-call resolution rate
             </div>
           </div>
+          {/* note: illustrative example; the phone mockup keeps a friendly
+              returning-customer scenario rather than any one industry. */}
         </Reveal>
       </div>
     </section>
@@ -289,7 +291,7 @@ function PhoneMockup() {
                 marginBottom: 5,
               }}
             >
-              Returning Patient · Dr. Patel
+              Returning customer · 3rd visit
             </div>
             <div
               style={{

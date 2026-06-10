@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./styles/themes.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,6 +10,20 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Dashboard design system (dark, per-vertical) — tokens defined in
+     styles/themes.css under [data-vertical]. Marketing site is unaffected. */
+  --color-base: rgb(var(--base) / <alpha-value>);
+  --color-surface: rgb(var(--surface) / <alpha-value>);
+  --color-surface-raised: rgb(var(--surface-raised) / <alpha-value>);
+  --color-line: rgb(var(--line) / <alpha-value>);
+  --color-ink: rgb(var(--ink) / <alpha-value>);
+  --color-ink-muted: rgb(var(--ink-muted) / <alpha-value>);
+  --color-v-accent: rgb(var(--accent) / <alpha-value>);
+  --color-v-accent-strong: rgb(var(--accent-strong) / <alpha-value>);
+  --color-on-accent: rgb(var(--on-accent) / <alpha-value>);
+  --radius-card: var(--radius-card);
+  --radius-badge: var(--radius-badge);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

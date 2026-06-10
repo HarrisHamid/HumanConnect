@@ -36,7 +36,7 @@ export function Nav() {
         </nav>
 
         <a
-          href="#dashboard"
+          href="#industries"
           className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/8 border border-primary/20 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-all duration-200"
         >
           See demo

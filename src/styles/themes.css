@@ -1,0 +1,99 @@
+/* src/styles/themes.css
+   ----------------------------------------------------------------
+   Vertical theming via CSS variables. Components never know which
+   vertical they're in — they use `surface`, `ink`, `v-accent`, etc.,
+   and the nearest [data-vertical] wrapper decides what those mean.
+
+   Apply in the /:vertical/:locationSlug dashboard route:
+     <main data-vertical={vertical.id} className="min-h-screen bg-base text-ink">
+
+   IMPORTANT — scoping:
+   The dark shell tokens below live on [data-vertical], NOT :root, so
+   they only apply inside the dashboard subtree. The marketing site
+   (home + picker) keeps its light OKLch theme from styles.css and is
+   never touched. In particular --accent here is a dashboard-only RGB
+   triplet and must not leak into the global (oklch) --accent.
+
+   Colors are RGB TRIPLETS (not hex) so Tailwind opacity modifiers
+   keep working (e.g. bg-surface/40). They are mapped to Tailwind
+   utilities in styles.css @theme inline (Tailwind v4, CSS-first —
+   there is no tailwind.config.js in this project):
+
+     --color-base           -> bg-base
+     --color-surface        -> bg-surface
+     --color-surface-raised -> bg-surface-raised
+     --color-line           -> border-line
+     --color-ink            -> text-ink
+     --color-ink-muted      -> text-ink-muted
+     --color-v-accent       -> text-v-accent / bg-v-accent
+     --color-v-accent-strong-> bg-v-accent-strong
+     --color-on-accent      -> text-on-accent
+     --radius-card          -> rounded-card
+     --radius-badge         -> rounded-badge
+
+   Chart colors: read at render time with `rgb(var(--chart-1))`
+   strings — Recharts accepts CSS color strings.
+   ---------------------------------------------------------------- */
+
+/* ----- Base dark shell, shared by every vertical ---------------- */
+[data-vertical] {
+  --base:           10 13 18;      /* page background        */
+  --surface:        16 20 27;      /* cards                  */
+  --surface-raised: 22 27 36;      /* hover / modals / table */
+  --line:           38 45 58;      /* borders, dividers      */
+  --ink:            232 236 241;   /* primary text           */
+  --ink-muted:      138 148 163;   /* secondary text         */
+
+  /* Neutral fallback accent (overridden per vertical below) */
+  --accent:         148 196 200;
+  --accent-strong:  108 166 172;
+  --on-accent:      10 13 18;
+
+  --chart-1: 148 196 200;
+  --chart-2: 102 132 146;
+  --chart-3: 70 88 104;
+
+  --radius-card:  14px;
+  --radius-badge: 999px;
+}
+
+/* ----- Dental: clinical, cool, precise --------------------------
+   Surgical teal on a slightly blue-shifted dark. Soft radii, airy.
+   Reads like equipment that gets sterilized.                       */
+[data-vertical='dental'] {
+  --surface:        15 21 28;
+  --surface-raised: 20 28 37;
+  --line:           36 48 60;
+
+  --accent:         86 222 200;    /* surgical teal           */
+  --accent-strong:  46 188 168;
+  --on-accent:      7 18 16;
+
+  --chart-1: 86 222 200;           /* booked                  */
+  --chart-2: 120 170 255;          /* rescheduled / info      */
+  --chart-3: 96 112 132;           /* inquiry / no booking    */
+
+  --radius-card:  16px;
+  --radius-badge: 999px;
+}
+
+/* ----- Mechanic: bold, utilitarian, shop-floor ------------------
+   Hazard amber on warm graphite. Tighter radii, heavier borders —
+   reads like a torque wrench, not a toothbrush.                    */
+[data-vertical='mechanic'] {
+  --base:           13 12 10;      /* warm-shifted near-black */
+  --surface:        21 19 16;
+  --surface-raised: 29 26 22;
+  --line:           54 48 40;
+
+  --accent:         255 176 32;    /* hazard amber            */
+  --accent-strong:  224 144 16;
+  --on-accent:      20 14 4;
+
+  --chart-1: 255 176 32;           /* estimate sent           */
+  --chart-2: 255 214 130;          /* checked in              */
+  --chart-3: 122 110 94;           /* inquiry / no action     */
+
+  --radius-card:  8px;             /* squarer = utilitarian   */
+  --radius-badge: 4px;             /* rectangular tags, like part labels */
+}

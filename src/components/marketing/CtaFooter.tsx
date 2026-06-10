@@ -69,7 +69,7 @@ export function CtaFooter() {
               Get started
             </p>
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] text-white">
-              Ready to give your clinic{" "}
+              Ready to give your business{" "}
               <span className="italic font-light text-white/85">a voice?</span>
             </h2>
             <p className="mt-6 text-lg text-white/70 font-light">
@@ -78,10 +78,10 @@ export function CtaFooter() {
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="#dashboard"
+                href="#industries"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-foreground font-semibold hover:bg-white/95 transition-all shadow-[0_4px_20px_oklch(0_0_0/20%)] hover:shadow-[0_8px_30px_oklch(0_0_0/30%)] hover:-translate-y-0.5"
               >
-                See It Live
+                See a live dashboard
                 <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
               <a
@@ -97,7 +97,7 @@ export function CtaFooter() {
               {[
                 { label: "Calls handled / month", value: "12,000+" },
                 { label: "Avg response time", value: "< 1s" },
-                { label: "Patient satisfaction", value: "97%" },
+                { label: "Customer satisfaction", value: "97%" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="text-2xl font-semibold text-white">{stat.value}</div>
