@@ -1,50 +1,96 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { ExtractedCallData } from "../types/vapi";
 import dotenv from "dotenv";
+import { ExtractedCallData } from "../types/vapi";
+import {
+  FALLBACK_OUTCOME,
+  OUTCOME_DESCRIPTIONS,
+  OUTCOMES,
+  VERTICAL_CONTEXT,
+  VerticalId,
+} from "../config/verticals";
 
 dotenv.config();
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-export async function analyzeTranscript(transcript: string): Promise<ExtractedCallData> {
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-5",
-    max_tokens: 500,
-    messages: [
-      {
-        role: "user",
-        content: `You are analyzing a medical clinic phone call transcript.
+const SENTIMENTS = ["positive", "neutral", "negative"] as const;
 
-Extract the following as JSON only — no markdown, no explanation, no backticks:
-{
-  "patient_name": "first name + last initial if mentioned, else Unknown",
-  "status": "Booked" | "Transferred" | "Missed",
-  "ai_summary": "one sentence summary of why they called",
-  "appointment": {
-    "doctor": "doctor name if mentioned, else null",
-    "datetime": "ISO string if date/time mentioned, else null",
-    "type": "New Patient" | "Follow-Up" | "Urgent" | "General",
-    "booked_via_ai": true
-  } | null
+function extractionSchema(vertical: VerticalId) {
+  return {
+    type: "object",
+    properties: {
+      caller_name: {
+        type: ["string", "null"],
+        description: "Caller's name as stated on the call (e.g. 'Maria Lopez'), or null if never given",
+      },
+      outcome: {
+        type: "string",
+        enum: [...OUTCOMES[vertical]],
+        description: "What actually happened on the call",
+      },
+      is_new_customer: {
+        type: ["boolean", "null"],
+        description: "true if clearly a first-time caller, false if clearly returning, null if unknown",
+      },
+      sentiment: { type: "string", enum: [...SENTIMENTS] },
+      transcript_summary: {
+        type: "string",
+        description: "One sentence, past tense, e.g. 'Booked a cleaning for Thursday 2:30 PM'",
+      },
+    },
+    required: ["caller_name", "outcome", "is_new_customer", "sentiment", "transcript_summary"],
+    additionalProperties: false,
+  } as const;
 }
 
+function buildPrompt(transcript: string, vertical: VerticalId): string {
+  const outcomes = OUTCOMES[vertical]
+    .map((o) => `- "${o}": ${OUTCOME_DESCRIPTIONS[vertical][o]}`)
+    .join("\n");
+
+  return `You are analyzing a phone call answered by an AI receptionist for ${VERTICAL_CONTEXT[vertical]}.
+
+Classify the call into exactly one outcome:
+${outcomes}
+
+Base everything strictly on the transcript — do not invent details. If the transcript is empty or unintelligible, use the least-action outcome and say so in the summary.
+
 Transcript:
-${transcript}`,
+${transcript}`;
+}
+
+/**
+ * Extract structured call data from a transcript, scoped to the
+ * vertical's outcome vocabulary. Throws on API/parse failure — the
+ * webhook route decides how to fall back.
+ */
+export async function analyzeTranscript(
+  transcript: string,
+  vertical: VerticalId
+): Promise<ExtractedCallData> {
+  const response = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    output_config: {
+      format: {
+        type: "json_schema",
+        schema: extractionSchema(vertical),
       },
-    ],
+    },
+    messages: [{ role: "user", content: buildPrompt(transcript, vertical) }],
   });
 
-  const raw = response.content[0].type === "text" ? response.content[0].text : "";
-
-  // Strip markdown code fences if Claude adds them
-  const cleaned = raw
-    .replace(/```json\n?/g, "")
-    .replace(/```\n?/g, "")
-    .trim();
-
-  try {
-    return JSON.parse(cleaned) as ExtractedCallData;
-  } catch {
-    throw new Error(`Claude returned invalid JSON: ${cleaned}`);
+  if (response.stop_reason === "refusal") {
+    throw new Error("Claude declined to analyze this transcript");
   }
+
+  const text = response.content.find((b) => b.type === "text")?.text ?? "";
+  const extracted = JSON.parse(text) as ExtractedCallData;
+
+  // Belt and suspenders: never let an off-vocabulary outcome reach the DB.
+  if (!OUTCOMES[vertical].includes(extracted.outcome)) {
+    extracted.outcome = FALLBACK_OUTCOME[vertical];
+  }
+
+  return extracted;
 }

@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 // is an illustrative, vertical-agnostic preview that funnels into the
 // industry picker — so it uses static demo rows, not live data.
 
-type Outcome = "Booked" | "Routed" | "Missed";
+type Outcome = "Booked" | "Rescheduled" | "Routed" | "Inquiry";
 
 interface DemoRow {
   id: string;
@@ -20,8 +20,9 @@ interface DemoRow {
 
 const outcomeStyles: Record<Outcome, string> = {
   Booked: "bg-success/10 text-success border-success/25",
+  Rescheduled: "bg-primary/10 text-primary border-primary/25",
   Routed: "bg-warning/10 text-warning border-warning/25",
-  Missed: "bg-destructive/10 text-destructive border-destructive/25",
+  Inquiry: "bg-secondary text-muted-foreground border-border",
 };
 
 const avatarColors = [
@@ -56,7 +57,7 @@ const DEMO_ROWS: DemoRow[] = [
     id: "d1",
     caller: "Margaret Johnson",
     is_new: false,
-    ai_notes: "Booked a follow-up for Thursday. Confirmed preferred time and verified details.",
+    ai_notes: "Booked her 6-month cleaning for Thursday 2:30 PM with Dana, her usual hygienist.",
     outcome: "Booked",
     call_duration: 184,
     created_at: "2026-06-09T10:30:00",
@@ -65,16 +66,16 @@ const DEMO_ROWS: DemoRow[] = [
     id: "d2",
     caller: "James Rivera",
     is_new: true,
-    ai_notes: "New customer. Collected details and scheduled a first appointment for Monday.",
+    ai_notes: "New patient — found the practice on Google. Booked a new-patient exam for Monday 9 AM.",
     outcome: "Booked",
     call_duration: 247,
-    created_at: "2026-06-09T09:58:00",
+    created_at: "2026-06-09T19:58:00",
   },
   {
     id: "d3",
     caller: "Patricia Osei",
     is_new: false,
-    ai_notes: "Time-sensitive request flagged. Routed to the on-call team with full context.",
+    ai_notes: "Severe pain after an extraction — flagged urgent and warm-transferred to Dr. Patel with full context.",
     outcome: "Routed",
     call_duration: 95,
     created_at: "2026-06-09T09:41:00",
@@ -83,17 +84,17 @@ const DEMO_ROWS: DemoRow[] = [
     id: "d4",
     caller: "David Kim",
     is_new: false,
-    ai_notes: "Quoted pricing and sent the estimate by text. Customer will confirm tomorrow.",
-    outcome: "Booked",
-    call_duration: 203,
+    ai_notes: "Moved Wednesday's filling to Friday 11 AM. Opened the Wednesday slot to the cancellation list.",
+    outcome: "Rescheduled",
+    call_duration: 121,
     created_at: "2026-06-09T09:12:00",
   },
   {
     id: "d5",
     caller: "Lena Marchetti",
     is_new: true,
-    ai_notes: "Asked about availability and services. Added to follow-up list for a callback.",
-    outcome: "Routed",
+    ai_notes: "Asked whether the practice takes Delta Dental PPO — confirmed coverage and offered to book. Will call back.",
+    outcome: "Inquiry",
     call_duration: 138,
     created_at: "2026-06-09T08:40:00",
   },
@@ -101,10 +102,10 @@ const DEMO_ROWS: DemoRow[] = [
     id: "d6",
     caller: "Thomas Adeyemi",
     is_new: false,
-    ai_notes: "Disconnected while on hold elsewhere. Callback flagged so nothing slips.",
-    outcome: "Missed",
-    call_duration: 42,
-    created_at: "2026-06-09T08:05:00",
+    ai_notes: "Called at 7:05 AM before opening. Booked a crown follow-up for tomorrow 3:15 PM.",
+    outcome: "Booked",
+    call_duration: 156,
+    created_at: "2026-06-09T07:05:00",
   },
 ];
 

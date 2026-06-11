@@ -1,4 +1,5 @@
 import { Phone } from "lucide-react";
+import { DEMO_PHONE, DEMO_PHONE_HREF } from "@/config/site";
 
 export function Nav() {
   return (
@@ -36,10 +37,11 @@ export function Nav() {
         </nav>
 
         <a
-          href="#cta"
-          className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/8 border border-primary/20 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-all duration-200"
+          href={DEMO_PHONE_HREF}
+          className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/8 border border-primary/20 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-all duration-200"
         >
-          See demo
+          <Phone className="size-3.5" />
+          <span className="tabular-nums">{DEMO_PHONE.display}</span>
         </a>
       </div>
     </header>

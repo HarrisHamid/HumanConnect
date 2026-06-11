@@ -1,7 +1,8 @@
-import { ArrowRight, PhoneCall, Wrench, Stethoscope } from "lucide-react";
+import { ArrowRight, Phone, PhoneCall, Wrench, Stethoscope } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/ui/reveal";
 import { verticalList } from "@/config/verticals";
+import { DEMO_PHONE, DEMO_PHONE_HREF } from "@/config/site";
 
 export function CtaFooter() {
   return (
@@ -71,13 +72,31 @@ export function CtaFooter() {
               Get started
             </p>
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] text-white">
-              Ready to give your business{" "}
-              <span className="italic font-light text-white/85">a voice?</span>
+              Hear it answer{" "}
+              <span className="italic font-light text-white/85">before you buy it.</span>
             </h2>
             <p className="mt-6 text-lg text-white/70 font-light">
-              Pick your industry to open a real, working dashboard — its own KPIs, language, and
-              look.
+              Call the demo line, then open the dashboard for your industry — its own
+              KPIs, language, and look.
             </p>
+
+            {/* Demo line — repeated here so nobody has to scroll back up */}
+            <div className="mt-8 flex justify-center">
+              <a
+                href={DEMO_PHONE_HREF}
+                className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl bg-white text-slate-900 font-semibold shadow-lg shadow-black/15 hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <span className="size-8 rounded-lg bg-slate-900/8 grid place-items-center">
+                  <Phone className="size-4" />
+                </span>
+                <span className="tabular-nums text-lg tracking-tight">
+                  {DEMO_PHONE.display}
+                </span>
+                <span className="text-sm font-normal text-slate-500 hidden sm:inline">
+                  — live now
+                </span>
+              </a>
+            </div>
 
             {/* Industry picker — each links into its live dashboard */}
             <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto text-left">
@@ -119,18 +138,23 @@ export function CtaFooter() {
               </a>
             </div>
 
-            {/* Trust strip */}
-            <div className="mt-14 flex items-center justify-center gap-8 flex-wrap">
-              {[
-                { label: "Calls handled / month", value: "12,000+" },
-                { label: "Avg response time", value: "< 1s" },
-                { label: "Customer satisfaction", value: "97%" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-2xl font-semibold text-white">{stat.value}</div>
-                  <div className="text-xs text-white/55 mt-0.5">{stat.label}</div>
-                </div>
-              ))}
+            {/* Founding program — honest early-stage social proof */}
+            <div className="mt-14 max-w-xl mx-auto rounded-2xl border border-white/20 bg-white/8 backdrop-blur-md px-6 py-5 text-left">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-white/60">
+                Founding practice program
+              </p>
+              <p className="mt-2 text-sm text-white/85 leading-relaxed">
+                We're onboarding our first practices now. Founding customers get setup
+                waived, a founding rate locked for life, and a direct line to the team
+                building their agent.
+              </p>
+              <a
+                href="mailto:harrishamid260@gmail.com?subject=HumanConnect%20AI%20—%20Founding%20practice"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-white hover:text-white/80 transition-colors"
+              >
+                Claim a founding spot
+                <ArrowRight className="size-4" />
+              </a>
             </div>
           </Reveal>
         </div>

@@ -37,13 +37,14 @@ export function Memory() {
             </span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed font-light max-w-lg">
-            When Mrs. Johnson calls back three months later, HumanConnect already
-            knows her name, her last visit, and what she came in for.
+            When Mrs. Johnson calls back three months after her crown, the agent
+            already knows her name, her last visit, and her preferred hygienist —
+            no "can I get your date of birth again?"
           </p>
 
           <ul className="mt-8 space-y-3.5">
             {[
-              "Full customer history, instantly recalled",
+              "Full caller history, instantly recalled",
               "Preferred staff, times, and services",
               "Notes from previous calls carry forward",
             ].map((item) => (
@@ -55,9 +56,8 @@ export function Memory() {
           </ul>
 
           <div className="mt-10 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-primary/6 border border-primary/15">
-            <div className="flex items-center gap-1.5 text-sm font-medium text-primary">
-              <span className="tabular-nums font-semibold text-lg text-foreground">94%</span>
-              first-call resolution rate
+            <div className="text-sm font-medium text-primary">
+              No patient ever repeats themselves — context carries across every call
             </div>
           </div>
           {/* note: illustrative example; the phone mockup keeps a friendly
